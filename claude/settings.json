@@ -1,0 +1,16 @@
+{
+  "theme": "dark",
+  "skipDangerousModePermissionPrompt": true,
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/lyk0i/scripts/tts_claude.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
