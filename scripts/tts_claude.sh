@@ -3,7 +3,7 @@
 # Recibe JSON en stdin con session_id
 
 VENV_PY=~/scripts/.venv/bin/python3
-VOICE="es-ES-AlvaroNeural"
+VOICE="es-ES-XimenaNeural"
 TTS_BIN=~/scripts/.venv/bin/edge-tts
 TMPFILE=/tmp/claude_tts_$$.mp3
 PIDFILE=/tmp/claude_tts.pid
@@ -28,7 +28,8 @@ except:
 
 # Localizar el archivo de conversación
 if [ -n "$SESSION_ID" ]; then
-    CONV_FILE=~/.claude/projects/-home-lyk0i/"${SESSION_ID}".jsonl
+    HOME_SLUG=$(echo "$HOME" | sed 's|/|-|g')
+    CONV_FILE=~/.claude/projects/${HOME_SLUG}/"${SESSION_ID}".jsonl
 else
     # Fallback: archivo modificado más recientemente
     CONV_FILE=$(find ~/.claude/projects -name "*.jsonl" -newer /tmp/.claude_tts_mark 2>/dev/null | sort -r | head -1)

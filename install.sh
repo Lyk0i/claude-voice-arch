@@ -48,12 +48,28 @@ CLAUDE_SETTINGS=~/.claude/settings.json
 mkdir -p ~/.claude
 
 if [ ! -f "$CLAUDE_SETTINGS" ]; then
-    cp claude/settings.json "$CLAUDE_SETTINGS"
+    cat > "$CLAUDE_SETTINGS" <<EOF
+{
+  "theme": "dark",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/scripts/tts_claude.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+EOF
     echo "    settings.json creado."
 else
     echo "    AVISO: $CLAUDE_SETTINGS ya existe."
     echo "    Añade manualmente el hook Stop:"
-    echo '    "hooks": { "Stop": [{ "hooks": [{ "type": "command", "command": "'"$HOME"'/scripts/tts_claude.sh" }] }] }'
+    echo "    \"command\": \"$HOME/scripts/tts_claude.sh\""
 fi
 
 # ── 5. Alias fish ────────────────────────────────────────────────────────────
